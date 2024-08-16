@@ -175,6 +175,8 @@ limitations under the License.
   #define NUCLEX_SUPPORT_CPU_YIELD _mm_pause()
 #elif defined(__arm__)
   #define NUCLEX_SUPPORT_CPU_YIELD asm volatile("yield")
+#elif defined(__aarch64__)
+  #define NUCLEX_SUPPORT_CPU_YIELD asm volatile("yield" ::: "memory");
 #else
   #define NUCLEX_SUPPORT_CPU_YIELD __builtin_ia32_pause()
 #endif

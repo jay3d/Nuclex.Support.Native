@@ -24,6 +24,7 @@ limitations under the License.
 #include "Nuclex/Support/Errors/EmptyDelegateCallError.h"
 
 #include <cassert> // for assert()
+#include <string>
 
 namespace Nuclex { namespace Support { namespace Events {
 

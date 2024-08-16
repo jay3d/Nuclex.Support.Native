@@ -105,6 +105,15 @@ namespace Nuclex { namespace Support {
     /// </returns>
     public: NUCLEX_SUPPORT_API static std::uint64_t GetUpperPowerOfTwo(std::uint64_t value);
 
+    /// <summary>
+    ///   Returns the nearest power of two that is greater than or equal to the input value
+    /// </summary>
+    /// <param name="value">Value in which the next power of two will be returned</param>
+    /// <returns>
+    ///   The nearest power of two that is greater than or equal to the input value
+    /// </returns>
+    public: NUCLEX_SUPPORT_API static std::size_t GetUpperPowerOfTwo(std::size_t value);
+
     /// <summary>Calculates the log base-2 of a 32 bit integer</summary>
     /// <param name="value">Value of which the log base-2 will be calculated</param>
     /// <returns>The log base-2 of the specified value</returns>
@@ -302,6 +311,31 @@ namespace Nuclex { namespace Support {
 
     return (value + 1);
 #endif
+  }
+
+// ------------------------------------------------------------------------------------------- //
+
+inline std::size_t BitTricks::GetUpperPowerOfTwo(std::size_t value) {
+    #if defined(_MSC_VER) && defined(_M_X64)
+    unsigned long bitIndex;
+    _BitScanReverse64(&bitIndex, value);
+    std::size_t lowerBound = 1ULL << bitIndex;
+    return lowerBound << static_cast<int>(value > lowerBound);
+    #elif defined(__clang__) || (defined(__GNUC__) || defined(__GNUG__))
+    std::size_t lowerBound = 9223372036854775808ULL >> __builtin_clzll(value);
+    return lowerBound << static_cast<int>(value > lowerBound);
+    #else
+    --value;
+
+    value |= value >> 1;
+    value |= value >> 2;
+    value |= value >> 4;
+    value |= value >> 8;
+    value |= value >> 16;
+    value |= value >> 32;
+
+    return (value + 1);
+    #endif
   }
 
   // ------------------------------------------------------------------------------------------- //
