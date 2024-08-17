@@ -104,7 +104,9 @@ namespace Nuclex { namespace Support {
     ///   The nearest power of two that is greater than or equal to the input value
     /// </returns>
     public: NUCLEX_SUPPORT_API static std::uint64_t GetUpperPowerOfTwo(std::uint64_t value);
-
+#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) \
+ || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     \
+ || defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
     /// <summary>
     ///   Returns the nearest power of two that is greater than or equal to the input value
     /// </summary>
@@ -113,7 +115,7 @@ namespace Nuclex { namespace Support {
     ///   The nearest power of two that is greater than or equal to the input value
     /// </returns>
     public: NUCLEX_SUPPORT_API static std::size_t GetUpperPowerOfTwo(std::size_t value);
-
+#endif
     /// <summary>Calculates the log base-2 of a 32 bit integer</summary>
     /// <param name="value">Value of which the log base-2 will be calculated</param>
     /// <returns>The log base-2 of the specified value</returns>
@@ -314,7 +316,9 @@ namespace Nuclex { namespace Support {
   }
 
 // ------------------------------------------------------------------------------------------- //
-
+#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) \
+ || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     \
+ || defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
 inline std::size_t BitTricks::GetUpperPowerOfTwo(std::size_t value) {
     #if defined(_MSC_VER) && defined(_M_X64)
     unsigned long bitIndex;
@@ -339,7 +343,7 @@ inline std::size_t BitTricks::GetUpperPowerOfTwo(std::size_t value) {
   }
 
   // ------------------------------------------------------------------------------------------- //
-
+#endif
   inline unsigned char BitTricks::GetLogBase2(std::uint32_t value) {
 #if defined(_MSC_VER)
     unsigned long bitIndex;

@@ -26,6 +26,7 @@ limitations under the License.
 #include <algorithm> // for std::copy_n()
 #include <vector> // for std::vector
 #include <cstdint> // for std::uint8_t
+#include <iterator>
 
 namespace Nuclex { namespace Support { namespace Events {
 
