@@ -104,9 +104,7 @@ namespace Nuclex { namespace Support {
     ///   The nearest power of two that is greater than or equal to the input value
     /// </returns>
     public: NUCLEX_SUPPORT_API static std::uint64_t GetUpperPowerOfTwo(std::uint64_t value);
-#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) \
- || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     \
- || defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
+#if defined(NUCLEX_SUPPORT_APPLE)
     /// <summary>
     ///   Returns the nearest power of two that is greater than or equal to the input value
     /// </summary>
@@ -316,9 +314,7 @@ namespace Nuclex { namespace Support {
   }
 
 // ------------------------------------------------------------------------------------------- //
-#if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) \
- || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     \
- || defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
+#if defined(NUCLEX_SUPPORT_APPLE)
 inline std::size_t BitTricks::GetUpperPowerOfTwo(std::size_t value) {
     #if defined(_MSC_VER) && defined(_M_X64)
     unsigned long bitIndex;

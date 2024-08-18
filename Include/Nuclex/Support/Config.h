@@ -27,6 +27,10 @@ limitations under the License.
   #error The Nuclex.Support.Native library does not support WinRT
 #elif defined(WIN32) || defined(_WIN32)
   #define NUCLEX_SUPPORT_WINDOWS 1
+#elif defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) \
+   || defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     \
+   || defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)
+  #define NUCLEX_SUPPORT_APPLE 1
 #else
   #define NUCLEX_SUPPORT_LINUX 1
 #endif
