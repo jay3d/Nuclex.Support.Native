@@ -140,21 +140,27 @@ namespace Nuclex { namespace Support { namespace Platform {
     bool isFileAccessError = (
       (errorNumber == EACCES) || // permission denied
       (errorNumber == EBADF) || // bad file descriptor
+#if !defined(NUCLEX_SUPPORT_APPLE)
       (errorNumber == EBADFD) || // file descriptor in bad state
+#endif
       (errorNumber == EBUSY) || // device or resource busy
       (errorNumber == EDQUOT) || // disk quota exceeded
       (errorNumber == EEXIST) || // file already exists
       (errorNumber == EFBIG) || // file too big
       (errorNumber == EIO) || // I/O error
       (errorNumber == EISDIR) || // directory with the same name exists
+#if !defined(NUCLEX_SUPPORT_APPLE)
       (errorNumber == EISNAM) || // is a named type file
       (errorNumber == EMEDIUMTYPE) || // wrong medium type
+#endif
       (errorNumber == ENAMETOOLONG) || // file name too long
       (errorNumber == ENFILE) || // too many open files
       (errorNumber == ENODEV) || // no such device
       (errorNumber == ENOENT) || // no such file or directory
       (errorNumber == ENOLINK) || // link target is invalid
+#if !defined(NUCLEX_SUPPORT_APPLE)
       (errorNumber == ENOMEDIUM) || // medium not found
+#endif
       (errorNumber == ENOSPC) || // no space left on device
       (errorNumber == ENOTBLK) || // block device required
       (errorNumber == ENOTDIR) || // not a directory

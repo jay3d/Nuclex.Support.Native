@@ -76,7 +76,7 @@ namespace {
         u8"Could not initialize pthread conditional variable attribute", result
       );
     }
-
+#if !defined(NUCLEX_SUPPORT_APPLE) /** FIXME: Find an alternative for Apple platforms **/
     // Change the attribute's clock settings so the monotonic clock is used
     result = ::pthread_condattr_setclock(&this->attribute, CLOCK_MONOTONIC);
     if(unlikely(result != 0)) {
@@ -84,7 +84,7 @@ namespace {
         u8"Could not set pthread conditional variable attribute's clock id", result
       );
     }
-
+#endif
   }
 
   // ------------------------------------------------------------------------------------------- //

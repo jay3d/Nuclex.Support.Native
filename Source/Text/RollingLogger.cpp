@@ -351,7 +351,11 @@ namespace Nuclex { namespace Support { namespace Text {
       currentCharacter[8] = '.';
 
       std::size_t timeMilliseconds = time.tv_nsec / nanosecondsPerMillisecond;
+#if defined(NUCLEX_SUPPORT_APPLE)
+      std::size_t count = lexical_append(currentCharacter + 9, 3, static_cast<uint64_t>(timeMilliseconds));
+#else
       std::size_t count = lexical_append(currentCharacter + 9, 3, timeMilliseconds);
+#endif
       if(count == 1) {
         currentCharacter[11] = currentCharacter[9];
         currentCharacter[9] = '0';
