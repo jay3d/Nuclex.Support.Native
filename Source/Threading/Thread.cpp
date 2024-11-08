@@ -124,7 +124,10 @@ namespace {
   ///   The affinity mask indicating which CPUs the thread can be scheduled on
   /// </returns>
   std::uint64_t queryPThreadThreadAffinity(const ::pthread_t &thread) {
-
+  #if defined(NUCLEX_SUPPORT_APPLE)
+    // macOS and iOS do not support querying CPU affinity, so return a mask indicating all CPUs are available.
+    return 0xFFFFFFFFFFFFFFFF;
+  #else
     // Query the affinity into pthreads' cpu_set_t
     ::cpu_set_t cpuSet;
     //CPU_ZERO(&cpuSet);
@@ -147,7 +150,7 @@ namespace {
     }
 
     return result;
-
+  #endif
   }
 #endif // !defined(NUCLEX_SUPPORT_WINDOWS)
   // ------------------------------------------------------------------------------------------- //
@@ -162,7 +165,11 @@ namespace {
   ///   the thread
   /// </param>
   void changePThreadThreadAffinity(const ::pthread_t &thread, std::uint64_t affinityMask) {
-
+  #if defined(NUCLEX_SUPPORT_APPLE)
+    // macOS and iOS do not support setting CPU affinity, so this is a no-op.
+    (void)thread;        // Suppress unused parameter warning
+    (void)affinityMask;  // Suppress unused parameter warning
+  #else
     // Translate the affinity mask into cpu_set_t
     ::cpu_set_t cpuSet;
     {
@@ -183,7 +190,7 @@ namespace {
         u8"Error changing CPU affinity via pthread_setaffinity_np()", errorNumber
       );
     }
-
+  #endif
   }
 #endif // !defined(NUCLEX_SUPPORT_WINDOWS)
   // ------------------------------------------------------------------------------------------- //

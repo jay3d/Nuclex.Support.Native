@@ -109,6 +109,8 @@ namespace Nuclex { namespace Support { namespace Threading {
       /// </remarks>
 #if defined(NUCLEX_SUPPORT_LINUX) || defined(NUCLEX_SUPPORT_WINDOWS)
       alignas(8) unsigned char implementationDataBuffer[sizeof(std::uint32_t)];
+#elif defined(NUCLEX_SUPPORT_APPLE)
+      unsigned char implementationDataBuffer[120];
 #else // Posix
       unsigned char implementationDataBuffer[96];
 #endif
