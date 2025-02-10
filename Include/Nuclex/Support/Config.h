@@ -69,9 +69,9 @@ limitations under the License.
 // We've got tons of u8"hello" strings that will become char8_t in C++20 and fail to build!
 // Bail out instead of letting the user scratch their head over weird compiler errors.
 #if defined(_MSVC_LANG) && (_MSVC_LANG >= 202002)
-  #error The Nuclex.Support.Native library does not work in C++20 mode yet
+  // #error The Nuclex.Support.Native library does not work in C++20 mode yet
 #elif defined(__cplusplus) && (__cplusplus >= 202002)
-  #error The Nuclex.Support.Native library does not work in C++20 mode yet
+  // #error The Nuclex.Support.Native library does not work in C++20 mode yet
 #endif
 
 // --------------------------------------------------------------------------------------------- >
